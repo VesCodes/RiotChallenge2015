@@ -185,6 +185,9 @@ def process2(matchDumpFile, targetDB, eventsDB, jsonDir):
 					""" BRAWLER ITEMS LOGIC """
 					# BRAWLER items get destroyed upon purchase
 					if item in brawlerItems:
+						if item not in itemLife:
+							itemLife[item] = []
+						itemLife[item].append([purchase, matchDuration])
 						count_Purchased += 1
 
 					""" UPGRADING ITEMS LOGIC """
@@ -193,16 +196,12 @@ def process2(matchDumpFile, targetDB, eventsDB, jsonDir):
 						# unupgraded item to itemLife array
 						if item not in itemLife:
 							itemLife[item] = []
-							itemLife[item].append([purchase, upgradeTime])
-						else:
-							itemLife[item].append([purchase, upgradeTime])
+						itemLife[item].append([purchase, upgradeTime])
 						# upgraded item to itemLife array
 						item = upgradingItems[item]
 						if item not in itemLife:
 							itemLife[item] = []
-							itemLife[item].append([upgradeTime, matchDuration])
-						else:
-							itemLife[item].append([upgradeTime, matchDuration])
+						itemLife[item].append([upgradeTime, matchDuration])
 					else:
 						# RAW DATA DUMPS only contain destroy events for upgrading 
 						# items, so this pertains only to them and not ALL items
@@ -212,16 +211,12 @@ def process2(matchDumpFile, targetDB, eventsDB, jsonDir):
 							# buys the same base upgradING item again -> ignore the consecutive destruction (upgrade);
 							if item not in itemLife:
 								itemLife[item] = []
-								itemLife[item].append([purchase, destroyTime])
-							else:
-								itemLife[item].append([purchase, destroyTime])
+							itemLife[item].append([purchase, destroyTime])
 					""" // UPGRADING ITEMS LOGIC """
 				else:
 					if item not in itemLife:
 						itemLife[item] = []
-						itemLife[item].append([purchase, matchDuration])
-					else:
-						itemLife[item].append([purchase, matchDuration])
+					itemLife[item].append([purchase, matchDuration])
 					count_Purchased += 1
 
 				purchaseNum += 1
