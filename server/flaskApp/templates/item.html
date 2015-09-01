@@ -26,7 +26,7 @@
 			<div class='builds-into'>
 			<h2>Builds Into</h2>
 				{% for parent in itemsJson[current]['into'] %}
-				<a href='/item/{{ parent }}' title='{{ itemsJson[parent]['name'] }}'><img src='{{ url_for('static', filename='images/item/' + parent) ~ '.png' }}'></a>
+				<a href='{{ url_for('itemPage', itemId=parent, region=region) }}' title='{{ itemsJson[parent]['name'] }}'><img src='{{ url_for('static', filename='images/item/' + parent) ~ '.png' }}'></a>
 				{% endfor %}
 			</div>
 			{% endif %}
@@ -94,6 +94,7 @@
 <!-- chart data -->
 <script>
 $(document).ready(function() {
+	regionSwitcher('{{ region }}')
 	itemChart('{{ url_for('static', filename='json/' + region + '/' + current + '.json') }}');
 })
 </script>

@@ -1,8 +1,9 @@
 {% extends pjax('base.html') %}
 
 {% block body %}
-<div style='margin-top: -56px; padding-top: 56px;'></div>
+
 <div class='itemlistPage'>
+	<div class='mobile-note'>Rotate to landscape to view item names!</div>
 	<table class='tablelist' style='width: 100%;'>
 		<thead>
 			<tr>
@@ -17,7 +18,8 @@
 {% for item in eventsDB[0] %}
 <tr id="_{{ item[0] }}">
 	<td data-order="{{ itemsJson[item[0]]['name'] }}">
-		<div class='list-icon' style="background: url({{ url_for('static', filename='images/sprite/') ~ itemsJson[item[0]]['image']['sprite']|replace('.png', '.jpg') }}) -{{ (itemsJson[item[0]]['image']['x'] / 1.5)|int }}px -{{ (itemsJson[item[0]]['image']['y'] / 1.5)|int }}px;"></div>{{ itemsJson[item[0]]['name'] }}
+		<div class='list-icon' style="background: url({{ url_for('static', filename='images/sprite/') ~ itemsJson[item[0]]['image']['sprite']|replace('.png', '.jpg') }}) -{{ (itemsJson[item[0]]['image']['x'] / 1.5)|int }}px -{{ (itemsJson[item[0]]['image']['y'] / 1.5)|int }}px;"></div>
+		<span class='list-name'>{{ itemsJson[item[0]]['name'] }}</span>
 	</td>
 	<td>{{ item[1][0] }}</td>
 	<td>{{ item[1][1] }}</td>
@@ -32,6 +34,7 @@
 
 <script>
 $(document).ready(function() {
+	regionSwitcher('{{ region }}')
 	tableList()
 });
 $(document).on('pjax:success', function() {
