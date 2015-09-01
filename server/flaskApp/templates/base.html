@@ -37,7 +37,14 @@
 <div class='container body'>
 {% block body %}{% endblock %}
 </div>
-<script> region = '{{ region }}'; </script>
+
+<script>
+	region = '{{ region }}'
+	$(document).on('ready', function() {
+		regionSwitcher(region)
+	})
+</script>
 <script src='{{ url_for('static', filename='js/lalaland.js') }}'></script>
+
 </body>
 </html>

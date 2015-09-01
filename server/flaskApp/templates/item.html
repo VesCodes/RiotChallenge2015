@@ -94,7 +94,6 @@
 <!-- chart data -->
 <script>
 $(document).ready(function() {
-	regionSwitcher('{{ region }}')
 	itemChart('{{ url_for('static', filename='json/' + region + '/' + current + '.json') }}');
 })
 </script>

@@ -5,11 +5,11 @@ from glob import glob
 
 """ WELCOME TO THE LEAGUE OF... PROCESSING. """
 
-untrackedItems = [2003, 2004, 2009, 2010, 2052, 2054, 2047, 		# general consumables
-					2137, 2138, 2139, 2140, 						# elixirs
-					2043, 2044, 									# consumable wards
-					3340, 3341, 3342, 3345, 3361, 3362, 3363, 3364, # trinkets
-					3040, 3042, 3930, 3931, 3932, 3933] 			# upgraded items
+untrackedItems = [2003, 2004, 2009, 2010, 2052, 2054, 2047, # general consumables
+2137, 2138, 2139, 2140, # elixirs
+2043, 2044, # consumable wards
+3340, 3341, 3342, 3345, 3361, 3362, 3363, 3364, # trinkets
+3040, 3042, 3930, 3931, 3932, 3933] # upgraded items
 upgradingItems = {3003: 3040, 3004: 3042, 3710: 3930, 3718: 3931, 3722: 3932, 3726: 3933} # upgradING : upgradED
 brawlerItems = [3611, 3612, 3613, 3614, 3615, 3616, 3617, 3621, 3622, 3623, 3624, 3625, 3626] # see lines 185-188
 
