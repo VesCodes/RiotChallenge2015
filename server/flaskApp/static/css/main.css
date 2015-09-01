@@ -100,9 +100,10 @@ a {
     text-align: center;
     text-transform: uppercase;
     width: 33px;
-}
+} .region-switcher li:last-child a { border-radius: 0 0 4px 4px; }
+.region-switcher li.active.dropped { border-radius: 4px 4px 0 0; }
 .region-switcher li a:hover, .region-switcher li.active:hover { background: #e0e01d; color: #1b1c1d; }
-.region-switcher li.active { display: block; background: #272829; color: #b7bbc0; cursor: default; }
+.region-switcher li.active { display: block; background: #272829; color: #b7bbc0; cursor: pointer; border-radius: 4px; }
 .region-switcher li.shown { display: block; }
 
 /*----------------------------------
@@ -377,7 +378,7 @@ a {
 
 /* ________  CHAMP PAGE  ________ */
 .tablelist { width: 100%; border-collapse: separate; border-spacing: 0 5px; }
-
+.mobile-note { display: none; width: 100%; text-align: center; padding: 11px 0; background: #e0e01d; color: #1b1c1d; border-radius: 4px; margin-bottom: 11px; }
 .tablelist td {
     text-align: left;
     height: 32px;
@@ -388,7 +389,7 @@ a {
 } .tablelist td.sorting_1 { color: #dce1e6; font-weight: bold; }
 
 .tablelist th {
-    font-size: 16px;
+    font-size: 1.125em;
     font-weight: bold;
     text-align: left;
     height: 32px;
@@ -396,7 +397,12 @@ a {
     padding-left: 5px;
 } .tablelist th.sorting_asc { color: #e0e01d; } 
 .tablelist th.sorting_desc { color: #e0e01d; }
-@media (min-width: 620px) {
+
+@media (max-width: 380px) { 
+    .list-name { display: none; }
+    .mobile-note { display: block; }
+}
+@media (min-width: 620px) { 
     .tablelist th.sorting_asc {
         background: url('../images/template/asc.png') no-repeat center right 5px;
     } .tablelist th.sorting_desc {

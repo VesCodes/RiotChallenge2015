@@ -3,8 +3,8 @@
 <head>
 	<meta charset='utf-8'>
 	<meta http-equiv='x-ua-compatible' content='ie=edge'>
-	<title>Lalaland</title>
-	<meta name='description' content='{% block page_description %}{% endblock %}'>
+	<title>Black Market Goods (& Bads)</title>
+	<meta name='description' content='Black Market Brawlers item performance impact, champion and item stats and more.'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 
 	<link rel='icon' href='{{ url_for('static', filename ='favicon.ico') }}'>
@@ -23,9 +23,9 @@
 	<div class='container'>
 		<a class='navbar logo' href='{{ url_for('home', region=region) }}' title='Home'></a>
 		<ul class='navbar region-switcher'>
-			<li class='active'>{{ regions[0] }}</li>
+			<li data-region='{{regions[0]}}' class='active'>{{ regions[0] }}</li>
 		{% for region in regions[1:] %}
-			<li><a href='/{{region}}/'>{{ region }}</a></li>
+			<li data-region='{{region}}'><a href='/{{region}}/'>{{ region }}</a></li>
 		{% endfor %}
 		</ul>
 		<div class='navbar search typeahead-container'>

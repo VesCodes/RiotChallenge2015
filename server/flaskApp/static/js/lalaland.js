@@ -1,10 +1,6 @@
 $(document).ready(function() {
 $(document).pjax('a:not(.navbar.logo, .region-switcher li a)', '.container.body'); // pjaxin'
 
-$('.region-switcher li.active').click(function() {
-	$('.region-switcher li').toggleClass('shown')
-})
-
 // ___ TYPEAHEAD ___ //
 itemData = []
 champData = []
@@ -247,7 +243,28 @@ function tableListPJAX() {
 	}	
 }
 
-function regionChange(toRegion) {
-	currentLoc = $(location).prop('href').split(region)[1]
-	console.log(toRegion + currentLoc)
+function regionSwitcher(currentRegion) {
+	$('.region-switcher li.active').click(function(e) {
+		currentLoc = window.location.href
+
+		$.each($('.region-switcher li:not(li.active)'), function() {
+			targetRegion = $(this).data('region')
+			$('a', this).attr('href', currentLoc.replace('/' + currentRegion + '/', '/' + targetRegion + '/'))
+			if (!$(this).hasClass('shown'))
+				$(this).addClass('shown')
+			else
+				$(this).removeClass('shown')
+		})
+		
+		$(this).toggleClass('dropped');
+		e.stopPropagation();
+	})
+	$('html').click(function() {
+		$('.region-switcher li').each(function() {
+			if ($(this).hasClass('dropped'))
+				$(this).removeClass('dropped');
+			if ($(this).hasClass('shown'))
+				$(this).removeClass('shown');
+		});
+	});
 }
