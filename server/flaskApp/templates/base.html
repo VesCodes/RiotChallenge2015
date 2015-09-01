@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='x-ua-compatible' content='ie=edge'>
+	<title>Lalaland</title>
+	<meta name='description' content='{% block page_description %}{% endblock %}'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+
+	<link rel='icon' href='{{ url_for('static', filename ='favicon.ico') }}'>
+	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Cousine:400,700,400italic,700italic'>
+	<link rel='stylesheet' href='{{ url_for('static', filename ='css/normalize.css') }}'>
+	<link rel='stylesheet' href='{{ url_for('static', filename ='css/main.css') }}'>
+	<script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
+	<script src='{{ url_for('static', filename='js/pjax.js') }}'></script>
+	<script src='{{ url_for('static', filename='js/typeahead.js') }}'></script>
+	<script src='{{ url_for('static', filename='js/chart.js') }}'></script>
+	<script src='{{ url_for('static', filename='js/datatables.js') }}'></script>
+</head>
+<body>
+
+<div id='topbar'>
+	<div class='container'>
+		<a class='navbar logo' href='{{ url_for('home', region=region) }}' title='Home'></a>
+		<ul class='navbar region-switcher'>
+			<li class='active'>{{ regions[0] }}</li>
+		{% for region in regions[1:] %}
+			<li><a href='/{{region}}/'>{{ region }}</a></li>
+		{% endfor %}
+		</ul>
+		<div class='navbar search typeahead-container'>
+			<input type='text' placeholder='Search Items, Champions and maybe even more' class='navbar search-bar' />
+			<div class='navbar search-icon'></div>
+		</div>
+	</div>
+</div>
+<div class='container body'>
+{% block body %}{% endblock %}
+</div>
+<script> region = '{{ region }}'; </script>
+<script src='{{ url_for('static', filename='js/lalaland.js') }}'></script>
+</body>
+</html>

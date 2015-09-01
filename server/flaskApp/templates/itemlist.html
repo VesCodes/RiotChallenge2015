@@ -1,0 +1,41 @@
+{% extends pjax('base.html') %}
+
+{% block body %}
+<div style='margin-top: -56px; padding-top: 56px;'></div>
+<div class='itemlistPage'>
+	<table class='tablelist' style='width: 100%;'>
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>Purchases</th>
+				<th>Sales</th>
+				<th>Undone Purchases</th>
+				<th>Undone Sales</th>
+			</tr>
+		</thead>
+		<tbody>
+{% for item in eventsDB[0] %}
+<tr id="_{{ item[0] }}">
+	<td data-order="{{ itemsJson[item[0]]['name'] }}">
+		<div class='list-icon' style="background: url({{ url_for('static', filename='images/sprite/') ~ itemsJson[item[0]]['image']['sprite']|replace('.png', '.jpg') }}) -{{ (itemsJson[item[0]]['image']['x'] / 1.5)|int }}px -{{ (itemsJson[item[0]]['image']['y'] / 1.5)|int }}px;"></div>{{ itemsJson[item[0]]['name'] }}
+	</td>
+	<td>{{ item[1][0] }}</td>
+	<td>{{ item[1][1] }}</td>
+	<td>{{ item[1][2] }}</td>
+	<td>{{ item[1][3] }}</td>
+</tr>
+{% endfor %}
+		</tbody>
+	</table>
+	<div style='clear: both;'></div>
+</div>
+
+<script>
+$(document).ready(function() {
+	tableList()
+});
+$(document).on('pjax:success', function() {
+	tableListPJAX()
+});
+</script>
+{% endblock %}

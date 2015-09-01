@@ -1,0 +1,102 @@
+{% extends pjax('base.html') %}
+
+{% block body %}
+<div class='itemPage'>
+	<div class='itemBlock-short'>
+			<a class='itemBlock-toggle'>
+				<img src='{{ url_for('static', filename ='images/item/' + current) ~ '.png' }}' class='item-icon' />
+				<div class='item-info'>
+					<div class='aligner'>
+						<h1 class='item-name'>{{ itemsJson[current]['name'] }}</h1>
+						<span class='item-cost'>{{ itemsJson[current]['gold']['total'] }}</span>
+					</div>
+				</div>
+				<div class='float-fix'></div>
+				<span class='toggle-text'>EXPAND ITEM DETAILS &#x25BE;</span>
+				<div style='clear: both;'></div>
+			</a>
+	</div>
+	<div class='itemBlock-detailed'>
+		<div class='item-info' {% if not itemsJson[current]['into'] and not itemsJson[current]['from'] %}style='float: none; width: 100%; margin-right: 0;'{% endif %}>
+			<h2>Description</h2>
+			<span class='item-description'>{{ itemsJson[current]['description']|safe }}</span>
+		</div>
+		<div class='item-build'>
+			{% if itemsJson[current]['into'] %}
+			<div class='builds-into'>
+			<h2>Builds Into</h2>
+				{% for parent in itemsJson[current]['into'] %}
+				<a href='/item/{{ parent }}' title='{{ itemsJson[parent]['name'] }}'><img src='{{ url_for('static', filename='images/item/' + parent) ~ '.png' }}'></a>
+				{% endfor %}
+			</div>
+			{% endif %}
+			{% if itemsJson[current]['from'] %}
+			<div class='builds-from'>
+			<h2>Build Path</h2>
+					{{ buildPath|safe }}
+				</div>
+			</div>
+			{% endif %}
+		</div>
+		<div style='clear: both;'></div>
+	</div>
+
+	<!-- CHARTS & ETC -->
+	<h2 style='margin-top: 22px;'>Performance Impact</h2>
+	<div class='item-chart'>
+		<div style='padding: 5px;'><div><canvas class='chart'></canvas></div></div>
+		<div class='chart-toggles'>
+			<a data-targetset='0' class='enabled'>Gold per 5</a>
+			<a data-targetset='1' class='enabled'>Creeps per Min</a>
+			<a data-targetset='2' class='enabled'>KDA</a>
+			<div class='champ-filter'>Filter: 
+			<select autocomplete='off'>
+				<option selected value='global'>Global</option>
+				{% for champ in topChamps %}
+				<option value='{{ champ[0] }}'>{{ champsJson[champ[0]]['name'] }}</option>
+				{% endfor %}
+			</select>
+			</div>
+		</div>
+	</div>
+
+	{% if topChamps %}
+	<h2>Most Built On</h2>
+	<div class='built-on'>
+		<div class='cell-large'>
+		{% for champ in topChamps[:5] %}
+			<a href='{{ url_for('champlistPage', region=region) ~ '#' ~ champsJson[champ[0]]['key'] }}' class='obj-block' title="{{ champsJson[champ[0]]['name'] }}">
+				<img src='{{ url_for('static', filename='images/champion/'+ champsJson[champ[0]]['key']) ~ '.png' }}' class='obj-icon'>
+				<div class='obj-info'>
+					<span class='obj-description'>{{ champ[1]|string }}% of games with</span>
+					<span class='obj-name'>{{ champsJson[champ[0]]['name'] }}
+				</div>
+			</a>
+		{% endfor %}
+		</div>
+		<div class='cell-large'>
+		{% for champ in topChamps[5:] %}
+			<a href='{{ url_for('champlistPage', region=region) ~ '#' ~ champsJson[champ[0]]['key'] }}' class='obj-block' title="{{ champsJson[champ[0]]['name'] }}">
+				<img src='{{ url_for('static', filename='images/champion/'+ champsJson[champ[0]]['key']) ~ '.png' }}' class='obj-icon'>
+				<div class='obj-info'>
+					<span class='obj-description'>{{ champ[1]|string }}% of games with</span>
+					<span class='obj-name'>{{ champsJson[champ[0]]['name'] }}
+				</div>
+			</a>
+		{% endfor %}
+		</div>
+		<div style='clear: both;'></div>
+	</div>
+	{% endif %}
+
+</div>
+
+<!-- chart data -->
+<script>
+$(document).ready(function() {
+	itemChart('{{ url_for('static', filename='json/' + region + '/' + current + '.json') }}');
+})
+</script>
+<!-- //chart data -->
+
+{% endblock %}
