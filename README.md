@@ -3,10 +3,6 @@ This is an entry for the [Riot Games API Challenge 2.0](https://developer.riotga
 
 **Black Market Goods (& Bads)** processes and presents crunched Black Market Brawlers match data from 10,000 games per region. Notably, individual items' impact on player performance is graphed for a relative understanding of item value.
 
-## Demo
-[![demo site](/demo_shot.jpg?raw=true)](http://104.236.45.210/na/)
-Before I bore you with my many words, here's a working demo to back them.
-
 ## The nitty-gritty
 ### Processing
 A pure Python solution, the match data processing - while arguably not efficiently optimized (yet) - is fairly thoroughly explained in-code.
@@ -42,26 +38,3 @@ While 99.9% of the data is processed before being handed to the server, there ar
 Using a couple libraries on the frontend worth mentioning here - [Chart.js](https://github.com/nnnick/Chart.js/), [Typeahead.js](https://github.com/twitter/typeahead.js/) and [DataTables](https://github.com/DataTables/DataTables).
 
 The [PJAX](https://github.com/defunkt/jquery-pjax) part was a personal itch/experiment as I've wanted to make one of those seemingly seamless websites for a while and never had a project that could benefit from it. 
-
-## What's next?
-Basics down just in time for the challenge deadline, the plan is to keep at it and potentially expand past BMB statistics. 
-
-Due to time constraints there is a particular originally planned feature that didn't make the cut (which makes me sad... so very, very sad) - detailed champion statistics (blimey! the whole individual champion page is missing). It's sitting with a priority on the TODO list:
-
-| Champ stats |
---- |
-| Overall performance with a timeline representation (similar to the PERFORMANCE IMPACT graphs for items); common and/or best performing item builds and build orders (provide curated item sets for download?) |
-
- 
-
-| Refactoring code |
---- |
-| Specifically the graph data processing which is fairly taxing and some other touchups I might notice while at it |
-
- 
-
-| Personal stats |
---- |
-| This is the first idea that would mean expanding past BMB. Allow users to analyze their own games and compare with their peers. Provide stats for players on the same level of play - what they build, what of it leads to good performance, what bad and what items and/or tactics counter others. |
-
-etc, etc... don't mean to bore you with just ideas; I'd much rather actually work on executing them than write about them. Have a "*Soon™*".
